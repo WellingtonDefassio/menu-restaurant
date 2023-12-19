@@ -4,7 +4,8 @@ import CategoriesScreens from "./src/screens/CategoriesScreens";
 
 export default function App() {
     return (
-        <View style={styles.container}>
+        <View>
+            <StatusBar style={"light"}/>
             <CategoriesScreens/>
         </View>
     );
