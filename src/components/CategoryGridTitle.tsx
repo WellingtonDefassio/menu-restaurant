@@ -4,6 +4,7 @@ import Category from "../models/category";
 
 interface CategoryGridTitleProps {
     category: Category
+    onPress: () => void
 }
 
 export default function CategoryGridTitle(props: CategoryGridTitleProps) {
@@ -11,6 +12,7 @@ export default function CategoryGridTitle(props: CategoryGridTitleProps) {
         <View style={styles.gridItem}>
             <Pressable
                 style={({pressed}) => [styles.button, pressed ? styles.buttonPressed : null]}
+                onPress={props.onPress}
             >
                 <View style={[styles.innerContainer,{backgroundColor: props.category.color}]}>
                     <Text style={styles.title}>{props.category.title}</Text>
