@@ -10,13 +10,13 @@ interface CategoriesScreensProps {
 
 export default function CategoriesScreens(props: CategoriesScreensProps) {
 
-    function pressHandler() {
-        props.navigation.navigate("Meals")
+    function pressHandler(item: Category) {
+        props.navigation.navigate("Meals", {categoryId: item.id})
     }
 
     function renderCategoryItem(item: Category) {
         return (
-            <CategoryGridTitle category={item} onPress={pressHandler}></CategoryGridTitle>
+            <CategoryGridTitle category={item} onPress={() => pressHandler(item)}></CategoryGridTitle>
         )
     }
 
