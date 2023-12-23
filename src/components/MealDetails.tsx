@@ -4,14 +4,16 @@ import Meal from "../models/meal";
 
 interface MealDetailsProps {
     meal: Meal
+    styles?: any
+    textStyles?: any
 }
 
-export default function MealDetails({meal}: MealDetailsProps) {
+export default function MealDetails(props: MealDetailsProps) {
     return (
-        <View style={styles.details}>
-            <Text style={styles.detailItem}>{meal.duration}m</Text>
-            <Text style={styles.detailItem}>{meal.complexity.toUpperCase()}</Text>
-            <Text style={styles.detailItem}>{meal.affordability.toUpperCase()}</Text>
+        <View style={[styles.details, props.styles]}>
+            <Text style={[styles.detailItem, props.textStyles]}>{props.meal.duration}m</Text>
+            <Text style={[styles.detailItem, props.textStyles]}>{props.meal.complexity.toUpperCase()}</Text>
+            <Text style={[styles.detailItem, props.textStyles]}>{props.meal.affordability.toUpperCase()}</Text>
         </View>
     );
 }
