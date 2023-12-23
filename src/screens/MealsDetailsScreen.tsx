@@ -4,6 +4,7 @@ import Meal from "../models/meal";
 import MealDetails from "../components/MealDetails";
 import Subtitle from "../components/mealDetail/Subtitle";
 import List from "../components/mealDetail/List";
+import IconButton from "../components/IconButton";
 
 export default function MealsDetailsScreen(props: any) {
     const meal: Meal = props.route.params.meal
@@ -16,7 +17,7 @@ export default function MealsDetailsScreen(props: any) {
 
     function renderFavIcon() {
         return (
-            <Button title={"Tap me!"} onPress={headerButtonPressHandler}/>
+            <IconButton onPress={headerButtonPressHandler} icon={"star"} color={"white"}/>
         )
     }
 
