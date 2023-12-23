@@ -13,7 +13,6 @@ interface MealsOverviewScreenProps {
 
 export default function MealsOverviewScreen(props: MealsOverviewScreenProps) {
 
-
     const categoryId = props.route.params.categoryId;
 
     const displayMeals = MEALS.filter((mealItem) => {
