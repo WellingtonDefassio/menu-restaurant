@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, Pressable, Image, StyleSheet} from 'react-native';
 import Meal from "../models/meal";
 import {useNavigation} from "@react-navigation/native";
+import MealDetails from "./MealDetails";
 
 interface MealItemProps {
     meal: Meal
@@ -13,7 +14,7 @@ export default function MealItem({meal}: MealItemProps) {
     const navigation = useNavigation<any>();
 
     function handleMealDetails() {
-        navigation.navigate('Details', {mealId: meal.id})
+        navigation.navigate('Details', {meal: meal})
     }
 
     return (
@@ -28,11 +29,7 @@ export default function MealItem({meal}: MealItemProps) {
                         <Image source={{uri: meal.imageUrl}} style={styles.image}/>
                         <Text style={styles.title}>{meal.title}</Text>
                     </View>
-                    <View style={styles.details}>
-                        <Text style={styles.detailItem}>{meal.duration}m</Text>
-                        <Text style={styles.detailItem}>{meal.complexity.toUpperCase()}</Text>
-                        <Text style={styles.detailItem}>{meal.affordability.toUpperCase()}</Text>
-                    </View>
+                    <MealDetails meal={meal}/>
                 </View>
             </Pressable>
         </View>
