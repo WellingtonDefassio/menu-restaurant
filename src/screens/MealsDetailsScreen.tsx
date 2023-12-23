@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, Text, Image, StyleSheet, ScrollView} from 'react-native';
+import React, {useLayoutEffect} from 'react';
+import {View, Text, Image, StyleSheet, ScrollView, Button} from 'react-native';
 import Meal from "../models/meal";
 import MealDetails from "../components/MealDetails";
 import Subtitle from "../components/mealDetail/Subtitle";
@@ -8,15 +8,20 @@ import List from "../components/mealDetail/List";
 export default function MealsDetailsScreen(props: any) {
     const meal: Meal = props.route.params.meal
 
+    useLayoutEffect(() => {
+        props.navigation.setOptions({
+            headerRight: () => renderFavIcon()
+        });
+    }, [props.navigation, headerButtonPressHandler]);
 
-    function renderSteps() {
+    function renderFavIcon() {
         return (
-            meal.steps.map(steps => {
-                return (
-                    <Text key={steps}>{steps}</Text>
-                )
-            })
+            <Button title={"Tap me!"} onPress={headerButtonPressHandler}/>
         )
+    }
+
+    function headerButtonPressHandler() {
+        console.log("Pressed!")
     }
 
     return (
