@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text, Pressable, Image, StyleSheet} from 'react-native';
-import Meal from "../models/meal";
+import Meal from "../../models/meal";
 import {useNavigation} from "@react-navigation/native";
-import MealDetails from "./MealDetails";
+import MealDetails from "../MealDetails";
 
 interface MealItemProps {
     meal: Meal
