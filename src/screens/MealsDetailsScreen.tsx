@@ -1,28 +1,37 @@
-import React, {useLayoutEffect} from 'react';
+import React, {useContext, useLayoutEffect} from 'react';
 import {View, Text, Image, StyleSheet, ScrollView, Button} from 'react-native';
 import Meal from "../models/meal";
 import MealDetails from "../components/MealDetails";
 import Subtitle from "../components/mealDetail/Subtitle";
 import List from "../components/mealDetail/List";
 import IconButton from "../components/IconButton";
+import {FavoritesContext} from "../store/context/favorites-context";
 
 export default function MealsDetailsScreen(props: any) {
     const meal: Meal = props.route.params.meal
+
+    const favMealsContext = useContext(FavoritesContext)
+
+    const mealsIsFavorite = favMealsContext.ids.includes(meal.id)
 
     useLayoutEffect(() => {
         props.navigation.setOptions({
             headerRight: () => renderFavIcon()
         });
-    }, [props.navigation, headerButtonPressHandler]);
+    }, [props.navigation, changeFavoriteStatus]);
 
     function renderFavIcon() {
         return (
-            <IconButton onPress={headerButtonPressHandler} icon={"star"} color={"white"}/>
+            <IconButton onPress={changeFavoriteStatus} icon={mealsIsFavorite ? "star" : "star-outline"} color={"white"}/>
         )
     }
 
-    function headerButtonPressHandler() {
-        console.log("Pressed!")
+    function changeFavoriteStatus() {
+        if(mealsIsFavorite) {
+            favMealsContext.removeFavorite(meal.id)
+        } else {
+            favMealsContext.addFavorite(meal.id)
+        }
     }
 
     return (
@@ -30,14 +39,14 @@ export default function MealsDetailsScreen(props: any) {
             <Image source={{uri: meal.imageUrl}} style={styles.image}/>
             <Text style={styles.title}>{meal.title}</Text>
             <MealDetails meal={meal} textStyles={styles.detailText}/>
-          <View style={styles.listOuterContainer}>
-              <View style={styles.listContainer}>
-                  <Subtitle text={"Ingredients"}/>
-                  <List items={meal.ingredients} />
-                  <Subtitle text={"Steps"}/>
-                  <List items={meal.steps} />
-              </View>
-          </View>
+            <View style={styles.listOuterContainer}>
+                <View style={styles.listContainer}>
+                    <Subtitle text={"Ingredients"}/>
+                    <List items={meal.ingredients}/>
+                    <Subtitle text={"Steps"}/>
+                    <List items={meal.steps}/>
+                </View>
+            </View>
         </ScrollView>
     );
 }
